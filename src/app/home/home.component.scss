@@ -1,0 +1,7 @@
+.wrap{position: relative;}
+.wrap:before{content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 60%; background-color: rgba(0,0,0,0.66);}
+
+.logo{text-align: center;    background: #2DA6D9;padding: 10px;    box-shadow: 0 0 5px;height:50px}
+.btn_pad{
+  padding-right: 2%;
+}

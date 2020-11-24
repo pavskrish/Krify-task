@@ -1,0 +1,86 @@
+<div class="logo text-left">
+  <div class="btn_pad"><button type="button" class="btn btn-light" [routerLink]="['/home']"> <i
+        class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;Back</button>
+  </div>
+
+</div>
+<div style="margin-top:50px"></div>
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <div class="login-wrap">
+      <h2 class="text-center" *ngIf="createMeet">Create Meeting</h2>
+      <h2 class="text-center" *ngIf="!createMeet">Edit Meeting</h2>
+      <form [formGroup]="meetingForm">
+        <div class="form-group">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" formControlName="firstname" class="form-control" placeholder="Firstname"
+            [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+          <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+            <div *ngIf="f.firstname.errors.required">User Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastname" class="form-control" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" formControlName="email" class="form-control" placeholder="Email"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.pattern">Please Enter a valid Email</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label>Country code <span class="req">*</span></label>
+            <select formControlName="countrycode" [(ngModel)]="selected" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.countrycode.errors }" (change)='onOptionsSelected($event)'>
+              <option *ngFor="let code of countrycodes" [value]="code.dial_code"> {{code.name}} ({{code.dial_code}})
+              </option>
+            </select>
+            <div *ngIf="submitted && f.countrycode.errors" class="invalid-feedback">
+              <div *ngIf="f.countrycode.errors.required">Country Code is required</div>
+            </div>
+          </div>
+          <div class="form-group col-6">
+            <label>Phone Number <span class="req">*</span></label>
+            <input type="text" formControlName="phone" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+              <div *ngIf="f.phone.errors.required">Phone Number is required</div>
+              <div *ngIf="f.phone.errors.pattern">Please Enter a valid Phone number</div>
+              <div *ngIf="f.phone.errors.maxlength && !f.phone.errors.pattern ">Phone Number should be in between 8 to 10 letters</div>
+              <div *ngIf="f.phone.errors.minlength && !f.phone.errors.pattern">Phone Number should be in between 8 to 10 letters</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Address <span class="req">*</span></label>
+          <input type="text" formControlName="address" class="form-control" placeholder="Address"
+            [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+          <!-- <input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }"> -->
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">Address is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Meeting Time <span class="req">*</span></label>
+          <input type="time" formControlName="meeting_time" class="form-control" placeholder="Meeting Time"
+            [ngClass]="{ 'is-invalid': submitted && f.meeting_time.errors }">
+          <div *ngIf="submitted && f.meeting_time.errors" class="invalid-feedback">
+            <div *ngIf="f.meeting_time.errors.required">Meeting time is required</div>
+
+          </div>
+        </div>
+        <div class="alert alert-danger text-center" *ngIf="errorMsg">
+          Please Fill All Required Fields
+        </div>
+        <button type="button" (click)="saveMeeting()" class="btn btn-primary" *ngIf="createMeet">Save</button>
+        <button type="button" (click)="updateMeeting()" class="btn btn-primary" *ngIf="!createMeet">Update</button>
+      </form>
+
+    </div>
+  </div>
+</div>
