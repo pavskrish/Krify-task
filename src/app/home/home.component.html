@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody *ngIf="meetingUsers.length>0">
-          <tr *ngFor="let user of meetingUsers  |  paginate: { itemsPerPage: 2, currentPage: p } ; let i=index">
+          <tr *ngFor="let user of meetingUsers  |  paginate: { itemsPerPage: 10, currentPage: p } ; let i=index">
             <th scope="row">{{i+1}}</th>
             <td>{{user.firstname}}</td>
             <td>{{user.lastname}}</td>
